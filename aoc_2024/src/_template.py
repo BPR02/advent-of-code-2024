@@ -19,4 +19,10 @@ def solve_b(input: str) -> int | str | None:
 
 
 if __name__ == "__main__":
-    run(YEAR, DAY, solve_a, solve_b)
+    import argparse
+
+    parser = argparse.ArgumentParser(description="Advent of Code")
+    parser.add_argument("--notest", action="store_true", required=False)
+    parser.add_argument("--retest", action="store_true", required=False)
+    args = parser.parse_args()
+    run(YEAR, DAY, solve_a, solve_b, ~args.notest, args.retest)
