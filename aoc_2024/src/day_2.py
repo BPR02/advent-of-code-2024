@@ -15,23 +15,21 @@ def solve_a(input: str) -> int | str | None:
     total = 0
     for line in lines:
         levels = line.split()
-        increasing = (int(levels[1]) > int(levels[0]))
+        increasing = int(levels[1]) > int(levels[0])
         unsafe = False
-        for i in range(1,len(levels)):
-            if increasing and int(levels[i]) <= int(levels[i-1]):
+        for i in range(1, len(levels)):
+            if increasing and int(levels[i]) <= int(levels[i - 1]):
                 unsafe = True
                 break
-            elif not increasing and int(levels[i]) >= int(levels[i-1]):
+            elif not increasing and int(levels[i]) >= int(levels[i - 1]):
                 unsafe = True
                 break
-            elif abs(int(levels[i])-int(levels[i-1])) > 3:
+            elif abs(int(levels[i]) - int(levels[i - 1])) > 3:
                 unsafe = True
                 break
         if not unsafe:
             total += 1
     return total
-                
-            
 
 
 def solve_b(input: str) -> int | str | None:
@@ -44,39 +42,40 @@ def solve_b(input: str) -> int | str | None:
         if not has_problem:
             total += 1
             continue
-        
+
         unsafe = True
-        for r in range(0,len(levels)):
+        for r in range(0, len(levels)):
             copy = levels.copy()
             copy.pop(r)
             if not check(copy):
                 unsafe = False
                 break
-        
+
         if not unsafe:
             total += 1
     print(total)
     # return total
     return None
 
+
 def check(levels):
-    increasing = (int(levels[1]) > int(levels[0]))
+    increasing = int(levels[1]) > int(levels[0])
     problem = False
-    for i in range(1,len(levels)):
+    for i in range(1, len(levels)):
         c1 = int(levels[i])
-        c2 = int(levels[i-1])
+        c2 = int(levels[i - 1])
         if increasing and c1 <= c2:
             problem = True
             break
         elif not increasing and c1 >= c2:
             problem = True
             break
-        elif abs(c1-c2) > 3:
+        elif abs(c1 - c2) > 3:
             problem = True
             break
 
     return problem
-    
+
 
 if __name__ == "__main__":
     import argparse
