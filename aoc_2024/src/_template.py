@@ -24,5 +24,6 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description="Advent of Code")
     parser.add_argument("--notest", action="store_true", required=False)
     parser.add_argument("--retest", action="store_true", required=False)
+    parser.add_argument("--manual", action="store_true", required=False)
     args = parser.parse_args()
-    run(YEAR, DAY, solve_a, solve_b, ~args.notest, args.retest)
+    run(YEAR, DAY, solve_a, solve_b, ~args.notest, args.retest, args.manual)

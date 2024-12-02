@@ -30,8 +30,16 @@ def test_puzzle(puzzle: Puzzle, func, part: str = "a"):
         print(f"---{sol}")
 
 
-def run(year: int, day: int, solve_a, solve_b, test: bool = True, retest: bool = False):
+def run(year: int, day: int, solve_a, solve_b, test: bool = True, retest: bool = False, manual: bool = False):
     print(f"{year} - DAY {day}")
+    if manual:
+        with open(f"manual_input/day_{day}.txt", "r") as file:
+            input = file.read()
+        solution_a = solve_a(input)
+        solution_b = solve_b(input)
+        print("Part 1:", solution_a)
+        print("Part 2:", solution_b)
+        return
     puzzle: Puzzle = Puzzle(year=year, day=day)
     input = puzzle.input_data
     if not puzzle.answered_a or retest:
