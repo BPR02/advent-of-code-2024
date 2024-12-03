@@ -30,7 +30,15 @@ def test_puzzle(puzzle: Puzzle, func, part: str = "a"):
         print(f"---{sol}")
 
 
-def run(year: int, day: int, solve_a, solve_b, test: bool = True, retest: bool = False, manual: bool = False):
+def run(
+    year: int,
+    day: int,
+    solve_a,
+    solve_b,
+    test: bool = True,
+    retest: bool = False,
+    manual: bool = False,
+):
     print(f"{year} - DAY {day}")
     if manual:
         with open(f"manual_input/day_{day}.txt", "r") as file:
