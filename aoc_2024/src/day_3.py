@@ -27,13 +27,10 @@ def solve_b(input: str) -> int | str | None:
     total = 0
     include = True
     for m in matches:
-        print(m)
         if m == "do()":
             include = True
-            print("enabled")
         elif m == "don't()":
             include = False
-            print("disabled")
         elif include:
             m: str = m
             m = m.strip("mul()")
