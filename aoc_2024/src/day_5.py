@@ -11,10 +11,10 @@ DAY = 5
 
 
 def solve_a(input: str) -> int | str | None:
-    ordering: dict[int,list[int]] = {}
+    ordering: dict[int, list[int]] = {}
     total = 0
     for line in input.splitlines():
-        if '|' in line:
+        if "|" in line:
             t, p = line.split("|")
             target = int(t)
             prev = int(p)
@@ -25,11 +25,11 @@ def solve_a(input: str) -> int | str | None:
         elif line != "":
             pages = line.split(",")
             first = int(pages[0])
-            if first not in ordering: 
+            if first not in ordering:
                 continue
             valid = [ordering[first]]
             correct = True
-            for i in range(1, len(pages)-1):
+            for i in range(1, len(pages) - 1):
                 page = int(pages[i])
                 if page not in ordering:
                     correct = False
@@ -42,18 +42,16 @@ def solve_a(input: str) -> int | str | None:
                     break
                 valid.append(ordering[page])
             if correct:
-                mid = len(pages)//2
+                mid = len(pages) // 2
                 total += int(pages[mid])
     return total
-    
-    
 
 
 def solve_b(input: str) -> int | str | None:
-    ordering: dict[int,list[int]] = {}
+    ordering: dict[int, list[int]] = {}
     total = 0
     for line in input.splitlines():
-        if '|' in line:
+        if "|" in line:
             t, p = line.split("|")
             target = int(t)
             prev = int(p)
@@ -64,11 +62,11 @@ def solve_b(input: str) -> int | str | None:
         elif line != "":
             pages = line.split(",")
             first = int(pages[0])
-            if first not in ordering: 
+            if first not in ordering:
                 continue
             valid = [ordering[first]]
             correct = True
-            for i in range(1, len(pages)-1):
+            for i in range(1, len(pages) - 1):
                 page = int(pages[i])
                 if page not in ordering:
                     correct = False
@@ -99,7 +97,7 @@ def solve_b(input: str) -> int | str | None:
                         check_nodes.append(node)
                 while len(check_nodes) > 0:
                     node = check_nodes.pop()
-                    new_pages.insert(0,f"{node}")
+                    new_pages.insert(0, f"{node}")
                     pages.remove(f"{node}")
                     for key, value in limited_ordering.items():
                         for page in new_pages:
@@ -108,7 +106,7 @@ def solve_b(input: str) -> int | str | None:
                                 value.remove(p)
                         if len(value) == 0 and f"{key}" in pages:
                             check_nodes.append(key)
-                mid = len(new_pages)//2
+                mid = len(new_pages) // 2
                 total += int(new_pages[mid])
     return total
 
