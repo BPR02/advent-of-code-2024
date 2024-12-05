@@ -10,5 +10,5 @@
 # mutate: score lib.compare.res aoc_calc equals output
 
 $data modify storage aoc:register lib.char.a.val set from storage aoc:register $(a)
-$data modify storage aoc:register lib.char.a.val set from storage aoc:register $(b)
+$data modify storage aoc:register lib.char.b.val set from storage aoc:register $(b)
 return run function aoc_lib:char/compare

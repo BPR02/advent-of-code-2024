@@ -8,7 +8,7 @@
 # mutate: l1 contains all elements
 
 
-$data modify storage aoc:register lib.list.in1 set from storage aoc:register $(l1)
-$data modify storage aoc:register lib.list.in2 set from storage aoc:register $(l2)
+$data modify storage aoc:register lib.list.sort.in1 set from storage aoc:register $(l1)
+$data modify storage aoc:register lib.list.sort.in2 set from storage aoc:register $(l2)
 function aoc_lib:list/extend
-$data modify storage aoc:register $(l1) set from storage aoc:register lib.list.in1
+$data modify storage aoc:register $(l1) set from storage aoc:register lib.list.sort.in1

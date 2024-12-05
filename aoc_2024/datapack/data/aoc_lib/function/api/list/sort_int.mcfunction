@@ -3,7 +3,7 @@
 # output: none
 #         list becomes sorted
 
-$data modify storage aoc:register lib.list.to_sort set from storage aoc:register $(list)
-scoreboard players set lib.list.type aoc_calc 1
+$data modify storage aoc:register lib.list.sort.to_sort set from storage aoc:register $(list)
+scoreboard players set lib.list.sort.type aoc_calc 1
 function aoc_lib:list/merge_sort/_run
-$data modify storage aoc:register $(list) set from storage aoc:register lib.list.to_sort
+$data modify storage aoc:register $(list) set from storage aoc:register lib.list.sort.to_sort

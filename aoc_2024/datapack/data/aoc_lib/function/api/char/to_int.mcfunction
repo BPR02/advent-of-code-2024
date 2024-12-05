@@ -5,7 +5,7 @@
 # output: -1 if it is not a letter
 #          else the ascii integer value
 #...
-# mutate: score lib.char.to_digit aoc_calc equals output
+# mutate: score lib.char.to_int aoc_calc equals output
 
 $data modify storage aoc:register lib.char.val set from storage aoc:register $(val)
-return run function aoc_lib:char/to_digit with storage aoc:register lib.char
+return run function aoc_lib:char/to_int with storage aoc:register lib.char

@@ -1,3 +1,12 @@
+# append a block position to the stack
+#...
+# input:  name: stack name
+#         id: block id
+#...
+# output: none
+#...
+# mutate: command with setblock command is added to stack
+
 # get block pos
 setblock ~ ~ ~ jukebox
 data modify storage aoc:register lib.stack.temp set from block ~ ~ ~
