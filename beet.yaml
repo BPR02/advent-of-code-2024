@@ -1,0 +1,10 @@
+require:
+  - aoc_2024.lib.mc
+
+data_pack:
+  load: aoc_2024/datapack
+  pack_format: 57
+
+
+output:
+  out/
