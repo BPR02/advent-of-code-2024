@@ -1,7 +1,10 @@
 # sorts a list of integers from least to greatest
-# input:  list: list
+#...
+# input:  list: list location
+#...
 # output: none
-#         list becomes sorted
+#...
+# mutate: list becomes sorted
 
 $data modify storage aoc:register lib.list.sort.to_sort set from storage aoc:register $(list)
 scoreboard players set lib.list.sort.type aoc_calc 1

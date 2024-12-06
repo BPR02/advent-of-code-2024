@@ -11,4 +11,4 @@ $function aoc_2024:load_input/day_$(day)
 execute store result score line_count aoc_calc run data get storage aoc:register input
 $function aoc_2024:logic/day_$(day)/part_$(part)/run
 $function aoc_2024:logic/day_$(day)/part_$(part)/clean_up
-$function aoc_2024:logic/day_$(day)/part_$(part)/visualize
+$schedule function aoc_2024:logic/day_$(day)/part_$(part)/visualize 5s

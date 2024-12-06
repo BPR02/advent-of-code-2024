@@ -1,9 +1,9 @@
-# converts a letter to it's ascii integer value
+# converts a character to it's integer value
 #...
 # input:  val: char location
 #...
-# output: -1 if it is not a letter
-#          else the ascii integer value
+# output: -1 if it is not a number
+#          else the integer value
 #...
 # mutate: score lib.char.to_int aoc_calc equals output
 
