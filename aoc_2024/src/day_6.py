@@ -63,6 +63,7 @@ def solve_b(input: str) -> int | str | None:
     total = 0
     cx = 0
     cy = 0
+    obstacles = {}
     while True:
         match d:
             case 0:
@@ -87,6 +88,7 @@ def solve_b(input: str) -> int | str | None:
         if cy > height - 1 or cy < 0 or cx > width - 1 or cx < 0:
             break
         elif map[cy][cx] == "#":
+            obstacles[(cx, cy)] = d
             d += 1
             if d > 3:
                 d = 0
@@ -97,7 +99,7 @@ def solve_b(input: str) -> int | str | None:
             gx = cx
             if (gx, gy) in visited:
                 continue
-            obs_check = {}
+            obs_check = obstacles.copy()
             visit_check = {}
             rx = gx
             ry = gy
