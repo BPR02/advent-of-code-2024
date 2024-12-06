@@ -57,7 +57,6 @@ def solve_b(input: str) -> int | str | None:
     width = len(map[-1])
     gy = g // width
     gx = g % width
-    start = (gx, gy)
     d = 0  # 0=up 1=right 2=down 3=left
     visited = {}
     pot_obs = {}
@@ -92,6 +91,8 @@ def solve_b(input: str) -> int | str | None:
             if d > 3:
                 d = 0
         else:
+            start = (gx,gy)
+            dc = d
             gy = cy
             gx = cx
             if (gx, gy) in visited:
@@ -100,7 +101,6 @@ def solve_b(input: str) -> int | str | None:
             visit_check = {}
             rx = gx
             ry = gy
-            dc = 0
             cx, cy = start
             mx, my = start
             while True:
