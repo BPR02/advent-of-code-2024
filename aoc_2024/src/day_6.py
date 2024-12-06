@@ -60,7 +60,6 @@ def solve_b(input: str) -> int | str | None:
     start = (gx, gy)
     d = 0  # 0=up 1=right 2=down 3=left
     visited = {}
-    path = []
     pot_obs = {}
     total = 0
     cx = 0
@@ -93,10 +92,10 @@ def solve_b(input: str) -> int | str | None:
             if d > 3:
                 d = 0
         else:
-            path.append(((gx, gy), d, visited[(gx, gy)]))
             gy = cy
             gx = cx
-
+            if (gx, gy) in visited:
+                continue
             obs_check = {}
             visit_check = {}
             rx = gx
