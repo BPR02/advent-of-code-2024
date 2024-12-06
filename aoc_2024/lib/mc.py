@@ -20,22 +20,6 @@ def parse_input(draft: Draft, input: str, day: int):
     draft.data[f"aoc_{YEAR}:load_input/day_{day}"] = Function(cmd)
 
 
-def write_functions(draft: Draft, cmd: str, day: int):
-    for i in range(1, 3):
-        draft.data[f"aoc_{YEAR}:solve/day_{day}/part_{i}"] = Function(
-            [
-                "scoreboard players reset * aoc_calc",
-                "scoreboard players reset * aoc_answer",
-                f"scoreboard players set day aoc_answer {day}",
-                f"scoreboard players set part aoc_answer {i}",
-                cmd,
-                "execute store result score input_length aoc_calc run data get storage aoc:register input",
-                "function aoc_lib:api/timer/start",
-                f"function aoc_{YEAR}:zzz_private/logic/day_{day}/part_{i}/run",
-            ]
-        )
-
-
 def beet_default(ctx: Context):
     day = 1
     while 1:
