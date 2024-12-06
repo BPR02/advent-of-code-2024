@@ -91,7 +91,7 @@ def solve_b(input: str) -> int | str | None:
             if d > 3:
                 d = 0
         else:
-            start = (gx,gy)
+            start = (gx, gy)
             dc = d
             gy = cy
             gx = cx
