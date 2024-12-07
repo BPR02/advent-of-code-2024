@@ -60,5 +60,6 @@ if __name__ == "__main__":
     parser.add_argument("--notest", action="store_true", required=False)
     parser.add_argument("--retest", action="store_true", required=False)
     parser.add_argument("--manual", action="store_true", required=False)
+    parser.add_argument("--part", action="store", required=False)
     args = parser.parse_args()
-    run(YEAR, DAY, solve_a, solve_b, ~args.notest, args.retest, args.manual)
+    run(YEAR, DAY, solve_a, solve_b, ~args.notest, args.retest, args.manual, args.part)

@@ -38,19 +38,22 @@ def run(
     test: bool = True,
     retest: bool = False,
     manual: bool = False,
+    part: str | None = None,
 ):
     print(f"{year} - DAY {day}")
     if manual:
         with open(f"manual_input/day_{day}.txt", "r") as file:
             input = file.read()
-        solution_a = solve_a(input)
-        solution_b = solve_b(input)
-        print("Part 1:", solution_a)
-        print("Part 2:", solution_b)
+        if part == "1" or part is None:
+            solution_a = solve_a(input)
+            print("Part 1:", solution_a)
+        if part == "2" or part is None:
+            solution_b = solve_b(input)
+            print("Part 2:", solution_b)
         return
     puzzle: Puzzle = Puzzle(year=year, day=day)
     input = puzzle.input_data
-    if not puzzle.answered_a or retest:
+    if (not puzzle.answered_a or retest) and (part == "1" or part is None):
         print("-Part 1")
         if test:
             print("--Testing")
@@ -61,7 +64,9 @@ def run(
         if solution_a is not None and not retest:
             print(f"--Submitting {solution_a}")
             puzzle.answer_a = solution_a
-    if (puzzle.answered_a and not puzzle.answered_b) or retest:
+    if ((puzzle.answered_a and not puzzle.answered_b) or retest) and (
+        part == "2" or part is None
+    ):
         print("-Part 2")
         if test:
             print("--Testing")
