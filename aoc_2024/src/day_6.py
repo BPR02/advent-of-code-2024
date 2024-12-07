@@ -100,16 +100,11 @@ def solve_b(input: str) -> int | str | None:
             if (gx, gy) in visited:
                 continue
             obs_check = obstacles.copy()
-            visit_check = {}
             rx = gx
             ry = gy
             cx, cy = start
             mx, my = start
             while True:
-                if (cx, cy) in visit_check and dc not in visit_check[(cx, cy)]:
-                    visit_check[(cx, cy)].append(dc)
-                else:
-                    visit_check[(cx, cy)] = [dc]
                 match dc:
                     case 0:
                         cy = my - 1
