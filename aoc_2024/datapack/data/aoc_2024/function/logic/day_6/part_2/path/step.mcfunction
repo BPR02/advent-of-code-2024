@@ -1,7 +1,7 @@
 # update path
 execute if block ~ ~-2 ~ air run return 1
 execute unless block ~ ~-1 ~ gray_concrete run scoreboard players add _t aoc_calc 1
-execute unless block ~ ~-1 ~ gray_concrete if score visualize aoc_calc matches 1 positioned ~ ~-1 ~ run function aoc_lib:api/stack/push_block {name:"day_6",id:"gray_concrete"}
+execute unless block ~ ~-1 ~ gray_concrete if score visualize aoc_calc matches 1 positioned ~ ~-2 ~ run function aoc_lib:api/stack/push_block {name:"day_6",id:"gray_concrete"}
 execute if score visualize aoc_calc matches 1 run function aoc_lib:api/stack/push_pause {name:"day_6",time:"1"}
 setblock ~ ~-1 ~ gray_concrete
 

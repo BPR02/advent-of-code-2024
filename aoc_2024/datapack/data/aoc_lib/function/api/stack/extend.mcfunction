@@ -7,4 +7,4 @@
 #...
 # mutate: "to" stack contains everything from "from" stack
 
-$data modify storage aoc:register lib.stack._.$(to) append from storage aoc:register lib.stack._.$(from)[]]
+$data modify storage aoc:register lib.stack._.$(to) append from storage aoc:register lib.stack._.$(from)[]

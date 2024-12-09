@@ -7,7 +7,6 @@ execute if block ~ ~2 ~ magenta_glazed_terracotta positioned ~ ~2 ~ run function
 
 execute if score visualize aoc_calc matches 1 run function aoc_lib:api/stack/push_block {name:"day_6",id:"light_gray_concrete"}
 execute if score visualize aoc_calc matches 1 if block ~ ~2 ~ red_concrete positioned ~ ~1 ~ run function aoc_lib:api/stack/push_block {name:"day_6",id:"red_concrete"}
-execute if score visualize aoc_calc matches 1 if block ~ ~2 ~ magenta_glazed_terracotta positioned ~ ~2 ~ run function aoc_lib:api/stack/push_block {name:"day_6",id:"magenta_glazed_terracotta[facing=south]"}
 
 data modify storage aoc:register temp.line set string storage aoc:register temp.line 1
 scoreboard players remove line_len aoc_calc 1

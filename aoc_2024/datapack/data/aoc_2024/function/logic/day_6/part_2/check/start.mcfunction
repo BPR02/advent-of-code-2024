@@ -24,6 +24,7 @@ execute if score d aoc_calc matches 3 run setblock ~-1 ~1 ~ orange_concrete
 # check for cycle
 scoreboard players operation dc aoc_calc = d aoc_calc
 execute if score visualize aoc_calc matches 1 run function aoc_lib:api/stack/setup {name:"ctx_vis"}
+execute if score visualize aoc_calc matches 1 run function aoc_lib:api/stack/setup {name:"ctx_vis1"}
 execute if function aoc_2024:logic/day_6/part_2/check/step run function aoc_2024:logic/day_6/part_2/check/mark
 function aoc_lib:api/stack/pop_all {name:"ctx",direction:"LIFO"}
 execute if score visualize aoc_calc matches 1 run function aoc_lib:api/stack/push_pause {name:"day_6",time:"1"}

@@ -16,5 +16,5 @@ data modify storage aoc:register lib.stack.temp.y set from storage aoc:register 
 data modify storage aoc:register lib.stack.temp.z set from storage aoc:register lib.stack.temp.abs[2]
 # store pos function in stack
 $data modify storage aoc:register lib.stack.temp.stack_name set value $(name)
-$data modify storage aoc:register lib.stack.temp.function_name set value $(function)
+$data modify storage aoc:register lib.stack.temp.function_name set value "$(function)"
 function aoc_lib:stack/push/positioned_function with storage aoc:register lib.stack.temp

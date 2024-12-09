@@ -2,6 +2,8 @@
 execute if block ~ ~-2 ~ air run return 0
 execute if score visualize aoc_calc matches 1 positioned ~ ~-1 ~ run function aoc_lib:api/stack/push_block {name:"day_6",id:"yellow_concrete"}
 execute if score visualize aoc_calc matches 1 positioned ~ ~-1 ~ run function aoc_lib:api/stack/push_positioned_function {name:"ctx_vis",function:"aoc_2024:logic/day_6/part_2/check/clear"}
+execute if score visualize aoc_calc matches 1 positioned ~ ~-1 ~ run function aoc_lib:api/stack/push_positioned_function {name:"ctx_vis1",function:"aoc_2024:logic/day_6/part_2/check/flash"}
+execute if score visualize aoc_calc matches 1 positioned ~ ~-1 ~ run function aoc_lib:api/stack/push_pause {name:"ctx_vis1",time:"1"}
 
 # turn at obstacle
 scoreboard players set blocked_c aoc_calc -1
