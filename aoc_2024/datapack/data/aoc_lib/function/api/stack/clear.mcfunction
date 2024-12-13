@@ -1,9 +1,0 @@
-# clears a stack
-#...
-# input:  name: stack name
-#...
-# output: none
-#...
-# mutate: stack is deleted
-
-$data remove storage aoc:register lib.stack._.$(name)
