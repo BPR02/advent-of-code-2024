@@ -12,4 +12,5 @@ dependencies = [
     "pyright>=1.1.389",
     "pytest>=8.3.3",
     "setuptools>=75.6.0",
+    "sympy>=1.13.3",
 ]
