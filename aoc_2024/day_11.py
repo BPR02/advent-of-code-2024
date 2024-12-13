@@ -4,25 +4,25 @@ from pathlib import Path
 path_root = Path(__file__).parents[1]
 sys.path.append(str(path_root))
 
-from functools import lru_cache
-
 from aoc_2024.util import run
 
 YEAR = 2024
 DAY = 11
 
+cache = {}
 
 def solve_a(input: str) -> int | str | None:
     n = input.split()
     nums = [int(x) for x in n]
     total = 0
     for num in nums:
-        total += iterate(num, 0, 25)
+        total += iterate(num, 25)
     return total
 
 
-@lru_cache(maxsize=None)
-def iterate(num: int, curr: int, times: int) -> int:
+def iterate(num: int, times: int) -> int:
+    if (num,times) in cache:
+        return cache[(num,times)]
     # apply rules
     new: list[int] = []
     if num == 0:
@@ -33,15 +33,15 @@ def iterate(num: int, curr: int, times: int) -> int:
         new = [num * 2024]
 
     # check if this is the last step
-    if curr + 1 == times:
-        # return len(values[num])
+    if times == 1:
+        cache[(num,times)] = len(new)
         return len(new)
 
     # recursively apply rules to updated number(s)
     total = 0
     for n in new:
-        # print(n)
-        total += iterate(n, curr + 1, times)
+        total += iterate(n, times-1)
+    cache[(num,times)] = total
     return total
 
 
@@ -50,7 +50,7 @@ def solve_b(input: str) -> int | str | None:
     nums = [int(x) for x in n]
     total = 0
     for num in nums:
-        total += iterate(num, 0, 75)
+        total += iterate(num, 75)
     return total
 
 
