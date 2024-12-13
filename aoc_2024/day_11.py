@@ -11,6 +11,7 @@ DAY = 11
 
 cache = {}
 
+
 def solve_a(input: str) -> int | str | None:
     n = input.split()
     nums = [int(x) for x in n]
@@ -21,8 +22,8 @@ def solve_a(input: str) -> int | str | None:
 
 
 def iterate(num: int, times: int) -> int:
-    if (num,times) in cache:
-        return cache[(num,times)]
+    if (num, times) in cache:
+        return cache[(num, times)]
     # apply rules
     new: list[int] = []
     if num == 0:
@@ -34,14 +35,14 @@ def iterate(num: int, times: int) -> int:
 
     # check if this is the last step
     if times == 1:
-        cache[(num,times)] = len(new)
+        cache[(num, times)] = len(new)
         return len(new)
 
     # recursively apply rules to updated number(s)
     total = 0
     for n in new:
-        total += iterate(n, times-1)
-    cache[(num,times)] = total
+        total += iterate(n, times - 1)
+    cache[(num, times)] = total
     return total
 
 
