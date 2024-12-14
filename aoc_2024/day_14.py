@@ -59,7 +59,8 @@ def solve_b(input: str) -> int | str | None:
 
     seconds = 0
     success = False
-    for _ in range(10000):
+    possible = []
+    for _ in range(width*height):
         seconds += 1
         pos = {}
         success = True
@@ -80,6 +81,7 @@ def solve_b(input: str) -> int | str | None:
                 break
             pos[(fx, fy)] = 1
         if success:
+            possible.append(seconds)
             print()
             print(seconds)
             for y in range(height):
@@ -90,7 +92,7 @@ def solve_b(input: str) -> int | str | None:
                     else:
                         l += " "
                 print(l)
-    return None
+    return possible
 
 
 if __name__ == "__main__":
