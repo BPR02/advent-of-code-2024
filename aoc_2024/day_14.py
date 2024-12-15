@@ -60,7 +60,7 @@ def solve_b(input: str) -> int | str | None:
     seconds = 0
     success = False
     possible = []
-    for _ in range(width*height):
+    for _ in range(width * height):
         seconds += 1
         pos = {}
         success = True
@@ -92,7 +92,7 @@ def solve_b(input: str) -> int | str | None:
                     else:
                         l += " "
                 print(l)
-    return possible
+    return possible[-1]
 
 
 if __name__ == "__main__":
