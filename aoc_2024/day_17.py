@@ -22,15 +22,15 @@ class Operator:
 
 
 class Reg:
-    RA = 0
-    RB = 0
-    RC = 0
+    RA: int
+    RB: int
+    RC: int
 
-    PC = 0
-    JMP = False
-    IO = []
+    PC: int
+    JMP: bool
+    IO: list[int]
 
-    def reset():
+    def reset(): # type: ignore
         Reg.RA = 0
         Reg.RB = 0
         Reg.RC = 0
@@ -42,6 +42,7 @@ class Reg:
 
 def solve_a(input: str) -> int | str | None:
     lines = input.splitlines()
+    Reg.reset()
     Reg.RA = int(lines[0].removeprefix("Register A: "))
     Reg.RB = int(lines[1].removeprefix("Register B: "))
     Reg.RC = int(lines[2].removeprefix("Register C: "))
@@ -77,10 +78,11 @@ def combo(operand: int):
             return Reg.RC
         case _:
             print("ERROR: Combo Operand", operand)
+    return -1
 
 
 def execute(operator: int, operand: int):
-    cmb = combo(operand)
+    cmb: int = combo(operand)
     match operator:
         case Operator.ADV:  # RA ; RA, RB, RC, operand
             num = Reg.RA
