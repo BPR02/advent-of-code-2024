@@ -15,26 +15,16 @@ MAX_INT = 2147483647
 class Node:
     pos: tuple[int, int]
     val: str | None
-    score: int = MAX_INT
-    dir: int = 0
-    prev: tuple[int, int] = None
+    score: int
+    dir: int
+    prev: tuple[int, int] | None
 
-    def __init__(self, pos, val, score, prev):
+    def __init__(self, pos: tuple[int,int], val: str | None = None, score: int=MAX_INT, dir: int=0, prev:tuple[int,int] | None = None):
         self.pos = pos
         self.val = val
         self.score = score
-        self.dir = 0
+        self.dir = dir
         self.prev = prev
-
-    def __init__(self, pos, val):
-        self.pos = pos
-        self.val = val
-        self.score = MAX_INT
-        self.dir = 0
-
-    def __init__(self, pos, val):
-        self.pos = pos
-        self.val = val
 
     def x(self):
         return self.pos[0]
@@ -45,17 +35,18 @@ class Node:
     def __str__(self) -> str:
         return f"{'{'}'pos':{self.pos} [{self.val}], 'dir':{self.dir}, 'score':{self.score},'prev':{self.prev}{'}'}"
 
+
 class Grid:
     width: int
     height: int
     nodes: list[list[Node]]
     queue: list[Node]
-    visited: dict[tuple[tuple[int,int,int]],Node]
+    visited: dict[tuple[tuple[int, int, int]], Node]
 
     def __init__(self, from_string: str):
         self.queue = []
         self.visited = {}
-        
+
         self.nodes = []
         grid = from_string.splitlines()
         self.height = len(grid)
@@ -66,7 +57,7 @@ class Grid:
                 if grid[y][x] != "#":
                     node = Node((x, y), grid[y][x])
                 else:
-                    node = Node((x, y), None)
+                    node = Node((x, y))
                 row.append(node)
             self.nodes.append(row)
 
@@ -76,7 +67,7 @@ class Grid:
             s = ""
             for x in range(self.width):
                 if self.nodes[y][x].val:
-                    s += self.nodes[y][x].val
+                    s += self.nodes[y][x].val # type: ignore
                 else:
                     s += "#"
             res += s + "\n"
@@ -112,13 +103,13 @@ class Grid:
         if self.nodes[y][x - 1].val:
             l.append(self.nodes[y][x - 1])
         return l
-    
+
     def get_turns_pos(self, pos: tuple[int, int], dir: int) -> list[Node]:
         x, y = pos
         pf = (x, y)
         pl = (x, y)
         pr = (x, y)
-        l = [None,None,None]
+        l = [None, None, None]
         match dir:
             case 0:  # north
                 pf = (x, y - 1)
@@ -137,19 +128,19 @@ class Grid:
                 pl = (x, y + 1)
                 pr = (x, y - 1)
         if self.nodes[pf[1]][pf[0]].val:
-            l[0] = self.nodes[pf[1]][pf[0]]
+            l[0] = self.nodes[pf[1]][pf[0]] # type: ignore
         if self.nodes[pl[1]][pl[0]].val:
-            l[1] = self.nodes[pl[1]][pl[0]]
+            l[1] = self.nodes[pl[1]][pl[0]] # type: ignore
         if self.nodes[pr[1]][pr[0]].val:
-            l[2] = self.nodes[pr[1]][pr[0]]
-        return l
-    
+            l[2] = self.nodes[pr[1]][pr[0]] # type: ignore
+        return l # type: ignore
+
     def get_turns(self, node: Node) -> list[Node]:
         return self.get_turns_pos(node.pos, node.dir)
-    
+
     def ins(self, node: Node):
         if node is None:
-            return        
+            return
         if len(self.queue) == 0:
             self.queue = [node]
             return
@@ -166,15 +157,15 @@ class Grid:
 
     def process(self):
         node = self.queue.pop(0)
-       # print("pop", node)
-        self.visited[(node.pos)] = node
+        # print("pop", node)
+        self.visited[(node.pos)] = node # type: ignore
         turns = self.get_turns(node)
         # for n in turns:
-           # print("  ", n)
+        # print("  ", n)
         if turns[0] is not None:
             compare = turns[0].score
-            if turns[0].pos in self.visited: 
-               # print("!!!")
+            if turns[0].pos in self.visited:
+                # print("!!!")
                 check_dir = turns[0].dir
                 if check_dir != node.dir:
                     compare += 1000
@@ -183,7 +174,7 @@ class Grid:
                 turns[0].score = node.score + 1
                 turns[0].prev = node.pos
             else:
-                turns[0] = None
+                turns[0] = None # type: ignore
         if turns[1] is not None:
             compare = turns[1].score
             if turns[1].pos in self.visited:
@@ -191,11 +182,11 @@ class Grid:
                 if check_dir != node.dir:
                     compare += 1000
             if compare > node.score:
-                turns[1].dir = (node.dir-1) % 4
+                turns[1].dir = (node.dir - 1) % 4
                 turns[1].score = node.score + 1001
                 turns[1].prev = node.pos
             else:
-                turns[1] = None
+                turns[1] = None # type: ignore
         if turns[2] is not None:
             compare = turns[2].score
             if turns[2].pos in self.visited:
@@ -203,32 +194,33 @@ class Grid:
                 if check_dir != node.dir:
                     compare += 1000
             if compare > node.score:
-                turns[2].dir = (node.dir+1) % 4
+                turns[2].dir = (node.dir + 1) % 4
                 turns[2].score = node.score + 1001
                 turns[2].prev = node.pos
             else:
-                turns[2] = None
+                turns[2] = None # type: ignore
         for n in turns:
             if n is None:
                 continue
             if n.val == "E":
                 return True
-           # print("  (", turns.index(n),")", n)
+            # print("  (", turns.index(n),")", n)
             self.ins(n)
         # return True
         return len(self.queue) == 0
 
+
 def solve_a(input: str) -> int | str | None:
     grid = Grid(input)
     pos = grid.find("S")
-   # print(grid)
-   # print(pos)
-   # print()
-    start = grid.get_node(pos)
+    # print(grid)
+    # print(pos)
+    # print()
+    start = grid.get_node(pos) # type: ignore
     start.dir = 1
     start.score = 0
     grid.ins(start)
-    
+
     # for _ in range(10):
     #     if grid.process():
     #         break
@@ -237,15 +229,14 @@ def solve_a(input: str) -> int | str | None:
     #    # print()
     while not grid.process():
         # for n in grid.queue:
-           # print(n)
-       # print()
+        # print(n)
+        # print()
         continue
-    
-    end = grid.get_node(grid.find("E"))
-    # print(end)
-    
-    return end.score
 
+    end = grid.get_node(grid.find("E")) # type: ignore
+    # print(end)
+
+    return end.score
 
 
 def solve_b(input: str) -> int | str | None:
