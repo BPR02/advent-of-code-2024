@@ -30,17 +30,23 @@ def solve_b(input: str) -> int | str | None:
     size = 71
     drop = [(int(p.split(",")[0]), int(p.split(",")[1])) for p in input.splitlines()]
 
-    drop_count = 0
-    while True:
+    low = 0
+    high = len(drop) - 1
+    mid = low + (high - low) // 2
+    while low < high:
+        mid = low + (high - low) // 2
         grid = Grid(size, size)
-        for i in range(drop_count):
+        for i in range(mid):
             if i >= len(drop):
                 return None
             pos = drop[i]
             grid.set_node(pos, "#")
         if grid.find_path((0, 0), (size - 1, size - 1), "#") is None:
-            return f"{drop[drop_count-1][0]},{drop[drop_count-1][1]}"
-        drop_count += 1
+            high = mid - 1
+        else:
+            low = mid + 1
+
+    return f"{drop[mid-1][0]},{drop[mid-1][1]}"
 
 
 if __name__ == "__main__":
