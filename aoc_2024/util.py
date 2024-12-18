@@ -245,13 +245,20 @@ class Grid:
         if node in self.queue:
             return
         w = node.score
-        i = 0
-        while i < len(self.queue):
-            c = self.queue[i].score
-            if w < c:
+        
+        low = 0
+        high = len(self.queue) - 1
+        mid = low + (high - low) // 2
+        while low < high:
+            mid = low + (high - low) // 2
+            c = self.queue[mid].score
+            if w == c:
                 break
-            i += 1
-        self.queue.insert(i, node)
+            if w < c:
+                high = mid - 1
+            else:
+                low = mid + 1
+        self.queue.insert(mid+1, node)
 
     def find_path(
         self, start: tuple[int, int], end: tuple[int, int], avoid: str = ""
