@@ -30,7 +30,7 @@ class Reg:
     JMP: bool
     IO: list[int]
 
-    def reset(): # type: ignore
+    def reset():  # type: ignore
         Reg.RA = 0
         Reg.RB = 0
         Reg.RC = 0
