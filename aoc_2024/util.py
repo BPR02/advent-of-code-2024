@@ -125,14 +125,15 @@ class Grid:
         width: int | None = None,
         height: int | None = None,
         from_string: str | None = None,
+        ignore: str = "#",
     ):
         self.queue = []
         if from_string is not None:
-            self.init_from_str(from_string)
+            self.init_from_str(from_string, ignore)
         elif width is not None and height is not None:
             self.init_from_dim(width, height)
 
-    def init_from_str(self, s: str):
+    def init_from_str(self, s: str, ignore: str):
         self.queue = []
         self.visited = {}
 
@@ -143,7 +144,7 @@ class Grid:
         for y in range(self.height):
             row = []
             for x in range(self.width):
-                if grid[y][x] != "#":
+                if grid[y][x] != ignore:
                     node = Node((x, y), grid[y][x])
                 else:
                     node = Node((x, y))
@@ -187,7 +188,13 @@ class Grid:
         return l
 
     def get_node(self, pos: tuple[int, int] | None) -> Node | None:
-        if pos is None:
+        if (
+            pos is None
+            or pos[0] < 0
+            or pos[1] < 0
+            or pos[0] >= self.width
+            or pos[1] >= self.height
+        ):
             return None
         return self.nodes[pos[1]][pos[0]]
 
